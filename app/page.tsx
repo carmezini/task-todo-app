@@ -1,9 +1,14 @@
-import Tasks from "./components/tasks/Tasks";
+'use client';
+import Tasks from './components/tasks/Tasks';
+import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
     return (
-		<main>
-			<Tasks />
-		</main>
-	)
+        <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+            <div>
+                <UserButton afterSignOutUrl='/' />
+                <Tasks />
+            </div>
+        </main>
+    );
 }

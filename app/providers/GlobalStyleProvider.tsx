@@ -6,7 +6,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-export default function GlobalStylesProvider({ children }: Props) {
+export default function GlobalStyleProvider({ children }: Props) {
     return (
         <div className='flex p-10 gap-10 h-full'>
             {children}

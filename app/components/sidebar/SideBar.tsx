@@ -6,13 +6,13 @@ import Image from 'next/image';
 import menu from '@/app/utils/menu';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-//import Button from '../Button/Button';
+import Button from '../button/Button';
 import { arrowLeft, bars, logout } from '@/app/utils/Icons';
-//import { UserButton, useClerk, useUser } from '@clerk/nextjs';
+import { UserButton, useClerk, useUser } from '@clerk/nextjs';
 
 function Sidebar() {
     const { theme, collapsed, collapseMenu } = useGlobalState();
-    /*const { signOut } = useClerk();
+    const { signOut } = useClerk();
 
     const { user } = useUser();
 
@@ -20,7 +20,7 @@ function Sidebar() {
         firstName: '',
         lastName: '',
         imageUrl: '',
-    };*/
+    };
 
     const router = useRouter();
     const pathname = usePathname();
@@ -44,12 +44,12 @@ function Sidebar() {
                         alt='profile'
                     />
                 </div>
-                {/*<div className='user-btn absolute z-20 top-0 w-full h-full'>
+                <div className='user-btn absolute z-20 top-0 w-full h-full'>
                     <UserButton />
                 </div>
                 <h1 className='capitalize'>
                     {firstName} {lastName}
-                </h1>*/}
+                </h1>
             </div>
             <ul className='nav-items'>
                 {menu.map((item) => {
@@ -70,7 +70,7 @@ function Sidebar() {
                     );
                 })}
             </ul>
-            {/*<div className='sign-out relative m-6'>
+            {<div className='sign-out relative m-6'>
                 <Button
                     name={'Sign Out'}
                     type={'submit'}
@@ -83,7 +83,7 @@ function Sidebar() {
                         signOut(() => router.push('/signin'));
                     }}
                 />
-                </div>*/}
+                </div>}
         </SidebarStyled>
     );
 }

@@ -1,10 +1,21 @@
 'use client';
-import { SignIn } from '@clerk/nextjs';
+import React from 'react';
+import { signIn, useSession, signOut } from 'next-auth/react';
 
-const SignInPage = () => (
-  <div>
-    <SignIn />
-  </div>
-);
+export default function SignIn() {
+	const { data: session } = useSession();
 
-export default SignInPage;
+	if (session) {
+		return (
+            <div>
+            </div>
+        );
+	}
+
+  	return (
+		<>
+			not sign in
+			<button onClick={() => signIn()}>Sign In</button>
+		</>
+  	)
+}

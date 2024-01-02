@@ -8,15 +8,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Button from '../button/Button';
 import { arrowLeft, bars, logout } from '@/app/utils/Icons';
-import { UserButton, useClerk, useUser } from '@clerk/nextjs';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 function Sidebar() {
+    const { data: session } = useSession();
     const { theme, collapsed, collapseMenu } = useGlobalState();
-    const { signOut } = useClerk();
 
-    const { user } = useUser();
-
-    const { firstName, lastName, imageUrl } = user || {
+    const { firstName, lastName, imageUrl } = {
         firstName: '',
         lastName: '',
         imageUrl: '',
@@ -44,9 +42,9 @@ function Sidebar() {
                         alt='profile'
                     />
                 </div>
-                <div className='user-btn absolute z-20 top-0 w-full h-full'>
+                {/*<div className='user-btn absolute z-20 top-0 w-full h-full'>
                     <UserButton />
-                </div>
+                </div>*/}
                 <h1 className='capitalize'>
                     {firstName} {lastName}
                 </h1>
@@ -79,9 +77,7 @@ function Sidebar() {
                     fw={'500'}
                     fs={'1.2rem'}
                     icon={logout}
-                    click={() => {
-                        signOut(() => router.push('/signin'));
-                    }}
+                    click={() => signOut()}
                 />
                 </div>}
         </SidebarStyled>

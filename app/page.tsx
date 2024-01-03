@@ -1,10 +1,9 @@
-'use client';
-import Tasks from './components/tasks/Tasks';
+"use client";
+import Tasks from "./components/tasks/Tasks";
+import { useGlobalState } from "./context/GlobalProvider";
 
 export default function Home() {
-    return (
-        <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-            <Tasks />
-        </main>
-    );
+  const { tasks } = useGlobalState();
+
+  return <Tasks title="All Tasks" tasks={tasks} />;
 }

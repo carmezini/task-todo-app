@@ -21,7 +21,7 @@ export const authOptions = {
         },
         //@ts-ignore
         async session({ session, token }) {
-            session.id = token.id.toString();
+            session.id = token.id;
             session.userName = token.userName;
             return session;
         },

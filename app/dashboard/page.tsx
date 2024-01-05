@@ -9,6 +9,7 @@ import Modal from '../components/modals/Modal';
 
 interface Props {
     title: string;
+    tasks?: any[];
 }
 
 function Tasks({ title }: Props) {
@@ -17,7 +18,7 @@ function Tasks({ title }: Props) {
     return (
         <TaskStyled theme={theme}>
             {modal && <Modal content={<CreateContent />} />}
-            <h1>{title}</h1>
+            <h1>{title ? title : 'All Tasks'}</h1>
 
             <button className='btn-rounded' onClick={openModal}>
                 {plus}

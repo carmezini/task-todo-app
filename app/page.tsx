@@ -6,6 +6,6 @@ import { redirect } from 'next/navigation';
 export default function Home() {
 
     useEffect(() => {
-         redirect('/login');
+        redirect('/login');
     }, [])
 }

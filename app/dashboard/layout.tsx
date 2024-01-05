@@ -3,10 +3,12 @@ import React from 'react';
 import styles from './LayoutAuth.module.css';
 import GlobalStyleProvider from '../providers/GlobalStyleProvider';
 import styled from 'styled-components';
+import Sidebar from '../components/sidebar/SideBar';
 
 export default function DashboardLayout( { children }: { children: React.ReactNode } ) {
     return (
         <DashboardStyles className='flex p-10 gap-10 h-full'>
+            <Sidebar />
             {children}
         </DashboardStyles>
     )

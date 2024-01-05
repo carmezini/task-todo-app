@@ -1,11 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useGlobalState } from '@/app/context/GlobalProvider';
 import Image from 'next/image';
 import menu from '@/app/utils/menu';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import Button from '../button/Button';
 import { arrowLeft, bars, logout } from '@/app/utils/Icons';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -20,11 +20,12 @@ function Sidebar() {
         imageUrl: '',
     };
 
-    const router = useRouter();
     const pathname = usePathname();
 
     const handleClick = (link: string) => {
-        router.push(link);
+        const dashboardHash = '/dashboard' + link
+        console.log(dashboardHash);
+        redirect(dashboardHash);
     };
 
     return (
@@ -60,7 +61,7 @@ function Sidebar() {
                             }}
                         >
                             {item.icon}
-                            <Link href={link}>{item.title}</Link>
+                            <Link href={`/dashboard${link}`}>{item.title}</Link>
                         </li>
                     );
                 })}

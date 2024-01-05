@@ -1,9 +1,11 @@
-"use client";
-import Tasks from "./components/tasks/Tasks";
-import { useGlobalState } from "./context/GlobalProvider";
+// app>page.tsx
+'use client';
+import { useEffect } from 'react';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  const { tasks } = useGlobalState();
 
-  return <Tasks title="All Tasks" tasks={tasks} />;
+    useEffect(() => {
+         redirect('/login');
+    }, [])
 }

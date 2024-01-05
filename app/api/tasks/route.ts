@@ -15,7 +15,7 @@ export async function POST(req: Request, res: Response) {
         const { title, description, date, completed, important } =
             await req.json();
 
-        if (!title || !description || !date || !completed) {
+        if (!title || !description || !date) {
             return NextResponse.json({ error: "BAD_REQUEST", status: 400 });
         }
 

@@ -8,8 +8,21 @@ interface Props {
 
 export default function GlobalStyleProvider({ children }: Props) {
     return (
-        <div className='flex p-10 gap-10 h-full'>
+        <GlobalStyles className='flex p-10 gap-10 h-full'>
             {children}
-        </div>
+        </GlobalStyles>
     )
 }
+
+const GlobalStyles = styled.div`
+    padding: 2.5rem;
+    display: flex;
+    gap: 2.5rem;
+    height: 100%;
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+`

@@ -17,7 +17,11 @@ export default function ContextProvider({ children }: Props) {
     }, []);
 
     if (!isReady) {
-        return null;
+        return (
+            <div className='w-full h-full flex items-center justify-center'>
+                <div className='loader'></div>
+            </div>
+        )
     }
 
     return (

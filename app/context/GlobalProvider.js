@@ -1,15 +1,15 @@
 'use client';
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import themes from './theme';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-//import { useUser } from '@clerk/nextjs';
+import { useSession } from "next-auth/react"
 
 export const GlobalContext = createContext();
 export const GlobalUpdateContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-    //const { user } = useUser();
+    const { data: session, status, update } = useSession()
 
     const [selectedTheme, setSelectedTheme] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -74,9 +74,9 @@ export const GlobalProvider = ({ children }) => {
     const importantTasks = tasks.filter((task) => task.isImportant === true);
     const incompleteTasks = tasks.filter((task) => task.isCompleted === false);
 
-    /*React.useEffect(() => {
-        if (user) allTasks();
-    }, [user]);*/
+    useEffect(() => {
+        if (status === "authenticated") allTasks();
+    }, [status]);
 
     return (
         <GlobalContext.Provider

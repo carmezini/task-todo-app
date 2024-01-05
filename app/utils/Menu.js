@@ -21,7 +21,7 @@ const menu = [
   },
   {
     id: 4,
-    title: "Do It Now",
+    title: "To do!",
     icon: todo,
     link: "/incomplete",
   },

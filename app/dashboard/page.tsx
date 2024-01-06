@@ -2,30 +2,66 @@
 import { useGlobalState } from '@/app/context/GlobalProvider';
 import React from 'react';
 import styled from 'styled-components';
-import CreateContent from '../components/modals/CreateContent';
-import TaskItem from '../components/TaskItem/TaskItem';
+import CreateContent from '@/app/components/modals/CreateContent';
+import TaskItem from '@/app/components/TaskItem/TaskItem';
 import { add, plus } from '@/app/utils/Icons';
-import Modal from '../components/modals/Modal';
+import Modal from '@/app/components/modals/Modal';
+import { useSession } from 'next-auth/react';
 
 interface Props {
     title: string;
-    tasks?: any[];
+    tasks: any[];
 }
 
-function Tasks({ title }: Props) {
-    const { tasks, theme, isLoading, openModal, modal } = useGlobalState();
+function Tasks({ title, tasks }: Props) {
+    const { theme, isLoading, openModal, modal, tasksAll } = useGlobalState();
 
-    return (
-        <TaskStyled theme={theme}>
+    const { data: session } = useSession();
+    console.log(session);
+
+    // If tasks prop is still not available, it means they are being fetched
+    if (!tasks) {
+        tasks = tasksAll;
+        return (
+            <TaskStyled theme={theme}>
             {modal && <Modal content={<CreateContent />} />}
-            <h1>{title ? title : 'All Tasks'}</h1>
+            <h1>All Tasks</h1>
 
             <button className='btn-rounded' onClick={openModal}>
                 {plus}
             </button>
 
             <div className='tasks grid'>
-                {tasks.map((task: any) => (
+                {tasks && tasks.map((task) => (
+                    <TaskItem
+                        key={task.id}
+                        title={task.title}
+                        description={task.description}
+                        date={task.date}
+                        isCompleted={task.isCompleted}
+                        id={task.id}
+                    />
+                ))}
+                <button className='create-task' onClick={openModal}>
+                    {add}
+                    Add New Task
+                </button>
+            </div>
+        </TaskStyled>
+        );
+    }
+
+    return (
+        <TaskStyled theme={theme}>
+            {modal && <Modal content={<CreateContent />} />}
+            <h1>{title}</h1>
+
+            <button className='btn-rounded' onClick={openModal}>
+                {plus}
+            </button>
+
+            <div className='tasks grid'>
+                {tasks && tasks.map((task) => (
                     <TaskItem
                         key={task.id}
                         title={task.title}

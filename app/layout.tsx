@@ -5,6 +5,8 @@ import { getServerSession } from 'next-auth';
 import './globals.css';
 import ContextProvider from './providers/ContextProvider';
 import NextTopLoader from 'nextjs-toploader';
+import { GlobalProvider } from './context/GlobalProvider';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
 
 const nunito = Nunito({
@@ -25,7 +27,7 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
 
     return (
         <html lang='en'>
@@ -45,9 +47,11 @@ export default async function RootLayout({
                         easing='cubic-bezier(0.53,0.21,0,1)'
                     />
                 <SessionProvider session={session}>
-                    <ContextProvider>
-                        {children}
-                    </ContextProvider>
+                    <GlobalProvider>
+                        <ContextProvider>
+                            {children}
+                        </ContextProvider>
+                    </GlobalProvider>
                 </SessionProvider>
             </body>
         </html>

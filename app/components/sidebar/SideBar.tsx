@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useGlobalState } from '@/app/context/GlobalProvider';
 import Image from 'next/image';
@@ -23,9 +23,7 @@ function Sidebar() {
     const pathname = usePathname();
 
     const handleClick = (link: string) => {
-        const dashboardHash = '/dashboard' + link
-        console.log(dashboardHash);
-        redirect(dashboardHash);
+        redirect(link);
     };
 
     return (
@@ -61,7 +59,7 @@ function Sidebar() {
                             }}
                         >
                             {item.icon}
-                            <Link href={`/dashboard${link}`}>{item.title}</Link>
+                            <Link href={link}>{item.title}</Link>
                         </li>
                     );
                 })}

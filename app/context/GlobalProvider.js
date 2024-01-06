@@ -73,7 +73,9 @@ export const GlobalProvider = ({ children }) => {
     const completedTasks = tasks.filter((task) => task.isCompleted === true);
     const importantTasks = tasks.filter((task) => task.isImportant === true);
     const incompleteTasks = tasks.filter((task) => task.isCompleted === false);
-
+    const tasksAll = tasks
+    console.log(tasks)
+    
     useEffect(() => {
         if (status === "authenticated") allTasks();
     }, [status]);
@@ -88,6 +90,7 @@ export const GlobalProvider = ({ children }) => {
                 completedTasks,
                 importantTasks,
                 incompleteTasks,
+                tasksAll,
                 updateTask,
                 modal,
                 openModal,

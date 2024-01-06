@@ -25,9 +25,9 @@ export default function ContextProvider({ children }: Props) {
     }
 
     return (
-        <GlobalProvider>
+        <>
             <Toaster />
             {children}
-        </GlobalProvider>
+        </>
     );
 }

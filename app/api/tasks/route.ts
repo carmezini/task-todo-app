@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import prisma from '@/app/utils/connect';
 import { authOptions } from '../auth/[...nextauth]/route';
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     try {
         const session = await getServerSession(authOptions);
         console.log(session);
@@ -25,7 +25,6 @@ export async function POST(req: Request, res: Response) {
             return NextResponse.json({ error: "Title must be at least 3 characters long", status: 400 });
         }
 
-        console.log(userId);
         const task = await prisma.task.create({
             data: {
                 title,

@@ -15,7 +15,7 @@ export default function Register() {
 
     const formik = useFormik({
         initialValues: {
-            username: '',
+            name: '',
             email: '',
             password: '',
             cpassword: '',
@@ -59,18 +59,19 @@ export default function Register() {
                     <div className={styles.input_group}>
                         <input
                             type='text'
-                            //name='Username'
+                            //@ts-ignore
+                            name='name'
                             placeholder='Username'
                             className={styles.input_text}
-                            {...formik.getFieldProps('username')}
+                            {...formik.getFieldProps('user')}
                         />
                         <span className='icon flex items-center px-4'>
                             <HiOutlineUser size={25} />
                         </span>
                     </div>
-                    {formik.errors.username && formik.touched.username ? (
+                    {formik.errors.name && formik.touched.name ? (
                         <span className='text-red-500'>
-                            {formik.errors.username}
+                            {formik.errors.name}
                         </span>
                     ) : (
                         <></>

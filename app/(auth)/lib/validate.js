@@ -24,8 +24,8 @@ export function registerValidate(values) {
     const errors = {};
 
     // Validate username
-    if (!values.username) {
-        errors.username = "Required";
+    if (!values.name) {
+        errors.name = "Required";
     }
 
     // Validate email address

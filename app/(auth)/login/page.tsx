@@ -22,6 +22,16 @@ export default function Login() {
         onSubmit,
     });
 
+    async function GitHubSignin() {
+        await signIn('github', {
+            callbackUrl: '/dashboard',
+        })
+    };
+
+    async function GoogleSignin() {
+        await signIn("google");
+    }
+
     async function onSubmit(values: any) {
         console.log(values);
         const status = await signIn('credentials', {
@@ -98,7 +108,7 @@ export default function Login() {
                         </button>
                     </div>
                     <div className='input-button'>
-                        <button type='button' className={styles.button_custom}>
+                        <button type='button' className={styles.button_custom} onClick={GoogleSignin}>
                             Sign In with Google
                             <Image
                                 src={'/assets/google.svg'}
@@ -109,7 +119,7 @@ export default function Login() {
                         </button>
                     </div>
                     <div className='input-button'>
-                        <button type='button' className={styles.button_custom}>
+                        <button type='button' className={styles.button_custom} onClick={GitHubSignin}>
                             Sign In with Github
                             <Image
                                 src={'/assets/github.svg'}

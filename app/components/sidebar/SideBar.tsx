@@ -8,10 +8,13 @@ import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
 import Button from '../button/Button';
 import { arrowLeft, bars, logout } from '@/app/utils/Icons';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
 
 function Sidebar() {
     const { data: session } = useSession();
+
+
     const { theme, collapsed, collapseMenu } = useGlobalState();
 
     const { firstName, lastName, imageUrl } = {
@@ -32,18 +35,9 @@ function Sidebar() {
                 {collapsed ? bars : arrowLeft}
             </button>
             <div className='profile'>
-                <div className='profile-overlay'></div>
-                <div className='image'>
-                    <Image
-                        width={70}
-                        height={70}
-                        src='/images/profile.png'
-                        alt='profile'
-                    />
+                <div className='profile-overlay'>
+                    <span className=' flex h-full text-gray-50 items-center justify-center'>Artur Carmezini</span>
                 </div>
-                <h1 className='capitalize'>
-                    {firstName} {lastName}
-                </h1>
             </div>
             <ul className='nav-items'>
                 {menu.map((item) => {
@@ -142,9 +136,15 @@ const SidebarStyled = styled.nav<{ collapsed: boolean }>`
     }
 
     .profile {
-        margin: 1.5rem;
-        padding: 1rem 0.8rem;
+        margin: 0rem;
+        margin-top: 0rem;
+        height: 11vh;
+        padding: 1.6rem 0.8rem;
+        
         position: relative;
+        background-image: linear-gradient(119deg, #27AE60 15%, #454E54 90%);
+        backdrop-filter: blur(10px);
+
 
         border-radius: 1rem;
         cursor: pointer;
@@ -154,6 +154,14 @@ const SidebarStyled = styled.nav<{ collapsed: boolean }>`
 
         display: flex;
         align-items: center;
+
+        .username {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            text-align: center;
+        }
 
         .profile-overlay {
             position: absolute;

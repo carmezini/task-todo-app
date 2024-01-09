@@ -5,10 +5,10 @@ import bcrypt from 'bcrypt';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { username, email, password } = body;
-        console.log(username, email, password);
+        const { name, email, password } = body;
+        console.log(name, email, password);
 		
-        if (!username || !email || !password) {
+        if (!name || !email || !password) {
             return NextResponse.json({ error: "Missing required fields", status: 400 });
         }
 
@@ -24,14 +24,38 @@ export async function POST(request: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prisma.user.create({
-            data: { email, username, hashedPassword },
+        const createdUser = await prisma.user.create({
+            data: { email, hashedPassword, name },
         });
 
-        return NextResponse.json(user);
+        return NextResponse.json(createdUser);
 
     } catch (error) {
         console.log('ERROR CREATING USER: ', error);
         return NextResponse.json({ error: 'Error creating user', status: 500 });
+    }
+}
+
+export async function GET(request: Request) {
+    try {
+        const body = await request.json();
+        const { name, email, password } = body;
+        //@ts-ignore
+
+
+        const exist = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        if (exist) {
+			return NextResponse.json(exist);
+        }
+
+
+    } catch (err) {
+        console.log('Error getting tasks', err);
+        return NextResponse.json({ err: 'Error getting tasks', status: 500 });
     }
 }

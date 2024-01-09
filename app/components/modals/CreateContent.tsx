@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
-//import Button from "../Button/Button";
+import Button from '../button/Button';
 import { add, plus } from '@/app/utils/Icons';
 
 function CreateContent() {
@@ -53,7 +53,7 @@ function CreateContent() {
             const res = await axios.post('/api/tasks', task);
 
             if (res.data.error) {
-                toast.error(res.data.error);
+                toast.error('Fill in all the fields');
             }
 
             if (!res.data.error) {
@@ -124,9 +124,16 @@ function CreateContent() {
             </div>
 
             <div className='submit-btn flex justify-end'>
-                <button type='submit' name='Create Task'>
-                    Create Task
-                </button>
+                <Button
+                    type='submit'
+                    name='Create Task'
+                    icon={add}
+                    padding={'0.8rem 2rem'}
+                    borderRad={'0.8rem'}
+                    fw={'500'}
+                    fs={'1.2rem'}
+                    background={theme.colorGreenDark}
+                />
             </div>
         </CreateContentStyled>
     );

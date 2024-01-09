@@ -17,7 +17,6 @@ function Tasks({ title, tasks }: Props) {
     const { theme, isLoading, openModal, modal, tasksAll } = useGlobalState();
 
     const { data: session } = useSession();
-    console.log(session);
 
     // If tasks prop is still not available, it means they are being fetched
     if (!tasks) {

@@ -33,7 +33,6 @@ export default function Login() {
     }
 
     async function onSubmit(values: any) {
-        console.log(values);
         const status = await signIn('credentials', {
             ...values,
             redirect: false,

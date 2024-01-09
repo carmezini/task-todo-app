@@ -28,7 +28,6 @@ export default function Register() {
         const res = await axios.post('/api/register', values);
 
         if (res.data.error) {
-            console.log(res.data.error);
             toast.error(res.data.error);
         }
 

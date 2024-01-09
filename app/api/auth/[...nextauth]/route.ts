@@ -7,15 +7,13 @@ import bcrypt from 'bcrypt';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from '@/app/utils/connect';
 
-console.log(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET)
-
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     session: {
         strategy: 'jwt',
     },
     secret: process.env.NEXTAUTH_SECRET as string,
-    debug: true,
+    debug: false,
     providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID as string,

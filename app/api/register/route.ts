@@ -6,7 +6,6 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
         const { name, email, password } = body;
-        console.log(name, email, password);
 		
         if (!name || !email || !password) {
             return NextResponse.json({ error: "Missing required fields", status: 400 });
